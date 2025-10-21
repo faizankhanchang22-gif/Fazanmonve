@@ -1,13 +1,9 @@
 const { Telegraf } = require('telegraf');
 const axios = require('axios'); 
 
-// ⚙️ CONFIGURATION (New Bot Token)
+// ⚙️ CONFIGURATION
+// **NEW BOT TOKEN:**
 const BOT_TOKEN = process.env.BOT_TOKEN || '8240758870:AAHVsyctX5euJjZ_U5xdS0xGQwxalkxejXk';
-
-// ⚠️ Naya Group Handle (Link ko username ki tarah use kar rahe hain)
-// Agar aapka group link https://t.me/SKqLFKDa1g1kZDJk hai, toh hum sirf 'SKqLFKDa1g1kZDJk' ko use karenge.
-// PRIVATE GROUPS KE LIYE ID (-100...) HAMESHA ZAROORI HAI.
-const TARGET_GROUP_HANDLE = 'SKqLFKDa1g1kZDJk'; 
 
 // List of mandatory channel usernames for joining.
 const REQUIRED_CHANNELS = [
@@ -21,6 +17,7 @@ const bot = new Telegraf(BOT_TOKEN);
  * Escapes text for safe use with MarkdownV2 formatting.
  */
 const escapeMarkdownV2 = (text) => {
+    // Escapes common MarkdownV2 special characters.
     return text.replace(/([\_*\[\]\(\)~`>#\+\-\=\|\{\}\.!])/g, '\\$1');
 };
 
@@ -30,11 +27,13 @@ const escapeMarkdownV2 = (text) => {
 async function isUserMemberOfAllChannels(userId) {
     for (const channelUsername of REQUIRED_CHANNELS) {
         try {
+            // NOTE: Bot must be Admin in both channels for this to work!
             const member = await bot.telegram.getChatMember(channelUsername, userId);
             if (!['member', 'creator', 'administrator'].includes(member.status)) {
                 return false; 
             }
         } catch (error) {
+            // Logs the error, mostly 403 Forbidden if bot is not admin in channel.
             console.error(`Error checking channel membership for ${channelUsername}:`, error.message);
             return false; 
         }
@@ -68,20 +67,13 @@ async function callExternalApi(userId) {
 bot.command('start', async (ctx) => {
     const userId = ctx.from.id;
     
-    // Group Check using handle (username or invite link part)
-    // NOTE: This check is complex and less reliable than using Chat ID.
-    const isTargetGroup = ctx.chat.username && ctx.chat.username === TARGET_GROUP_HANDLE;
-    const isTargetType = ctx.chat.type === 'group' || ctx.chat.type === 'supergroup';
-
-    // If it's a private chat, reply that it must be a group
-    if (!isTargetType) {
+    // Check if it's a private chat, if yes, ask to go to group.
+    if (ctx.chat.type !== 'group' && ctx.chat.type !== 'supergroup') {
         await ctx.replyWithMarkdownV2(`**❌ Yeh Bot Sirf Group Chat Main Work Karega\.**`);
-        return; 
+        return; // Stop processing in private chat
     }
     
-    // If it's the wrong group, we'll let it proceed to channel check for simplicity.
-
-    // If Group, check Channel membership
+    // Check Channel membership (This is the critical step)
     const isMember = await isUserMemberOfAllChannels(userId);
 
     if (isMember) {
@@ -118,18 +110,26 @@ bot.command('start', async (ctx) => {
 });
 
 
-// 🚀 Vercel Export Setup (Handles GET vs POST requests gracefully)
+// 🚀 Vercel Export Setup (Node.js function for Vercel)
 module.exports = async (req, res) => {
+    // Check if it's a POST request (from Telegram)
     if (req.method === 'POST' && req.body) {
         try {
             await bot.handleUpdate(req.body, res);
         } catch (error) {
             console.error('Error handling Telegram update:', error.message);
+            // Even on error, send 200 OK so Telegram doesn't retry
             res.statusCode = 200; 
             res.end();
         }
     } else {
+        // Handle GET requests (browser/monitor)
         res.statusCode = 200;
         res.end('Bot is running and waiting for Telegram updates.');
     }
 };
+
+// Set commands for Telegram interface
+bot.telegram.setMyCommands([
+    { command: 'start', description: 'Bot ko start karein aur channels ki membership check karein.' }
+]);
