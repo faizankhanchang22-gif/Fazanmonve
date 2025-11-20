@@ -1,0 +1,263 @@
+<!Dm<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAIZAN BALOCH PORTFOLIO</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Courier New', monospace;
+      color: #00ffcc;
+      overflow-x: hidden;
+    }
+
+    /* Background Video */
+    .bg-video {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+      border: none;
+      pointer-events: none;
+    }
+
+    header {
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .dp {
+      margin: 0 auto;
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      border: 4px solid #00ffaa;
+      box-shadow: 0 0 30px #00ffaa;
+      background: url("https://i.ibb.co/sdfLv626/684d14c6314277d1a538588993aed018.jpg") center/cover no-repeat;
+    }
+
+    h1 {
+      margin-top: 20px;
+      font-size: 50px;
+      text-shadow: 0 0 20px red, 0 0 40px red;
+    }
+
+    h2 {
+      font-size: 22px;
+      text-shadow: 0 0 15px cyan;
+    }
+
+    section {
+      padding: 40px 20px;
+      text-align: center;
+      background: rgba(0,0,0,0.6);
+      margin: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #00ffaa;
+    }
+
+    section h3 {
+      font-size: 28px;
+      margin-bottom: 15px;
+      text-shadow: 0 0 12px #ff0000;
+    }
+
+    section p, section a {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #fff;
+    }
+
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+    }
+
+    .whatsapp-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 24px;
+      font-size: 20px;
+      color: #000;
+      background: #25D366;
+      border-radius: 30px;
+      box-shadow: 0 0 15px #25D366;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    .whatsapp-btn:hover {
+      background: #1da851;
+      box-shadow: 0 0 25px #25D366;
+    }
+
+    /* Obito Quotes */
+    .quotes p {
+      font-size: 20px;
+      margin: 15px 0;
+      text-shadow: 0 0 12px #ff4d4d;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Video -->
+  <iframe class="bg-video"
+    src="https://streamable.com/e/bn30dk?autoplay=1&loop=1&muted=1"
+    allow="autoplay"
+  ></iframe>
+
+  <!-- Header -->
+  <header>
+    <div class="dp"></div>
+    <h1>🔥 FAIZAN BALOCH 🔥</h1>
+    <h2> APP BUILDER • Web Developer • Coder •  ⚡</h2>
+  </header>
+
+  <!-- About -->
+  <section>
+    <h3>🚀 About Me</h3>
+    <p>
+      I'm <b>Faizan Baloch</b>, a digital warrior who blends hacking, coding, and creativity.  
+      Skilled in ethical hacking, master of databases, and a pro at building powerful web apps.  
+      — <i>“ unstoppable reality.”</i>
+    </p>
+  </section>
+
+  <!-- Skills -->
+  <section>
+    <h3>💻 Skills</h3>
+    <p>⚡ Ethical Hacking Expert – Finding flaws, building defenses</p>
+    <p>⚡ Full-Stack Web Developer – From frontend beauty to backend power</p>
+    <p>⚡ Coding Wizard – Writes code like poetry</p>
+  </section>
+
+  <!-- Websites -->
+  <section>
+    <h3>🌐 My Creations</h3>
+    <p><a href="https://faizandatabases.netlify.app/" target="_blank">📂 Faizan Database</a></p>
+    <p><a href="https://ishq-ka-safar.lovable.app/story" target="_blank">❤️ For Lovers</a></p>
+    <p><a href="https://faizansmsbombar.netlify.app/" target="_blank">💣 Faizan Bomber</a></p>
+    <p><a href="https://obitolookup.vercel.app" target="_blank">📱 Pak Num Finder</a></p>
+    <p><a href="https://insta-reel-snap.lovable.app/" target="_blank">📷 Insta Reel Snap</a></p>
+  </section>
+
+  <!-- Obito Dialogues -->
+  <section class="quotes">
+    <h3>🌀 Obito Uchiha Dialogues</h3>
+    <p>“In this world, wherever there is light — there are also shadows.”</p>
+    <p>“Hope is a useless thing, it only brings pain.”</p>
+    <p>“Those who abandon their comrades are worse than scum.”</p>
+    <p>“No matter how deep the night, it always turns to day.”</p>
+  </section>
+
+  <!-- Contact -->
+  <section>
+    <h3>📱 Contact Me</h3>
+    <a class="whatsapp-btn" href="https://wa.me/923042254881?text=Hi%20O%2C%20B%20I%20TO%3F" target="_blank">
+      💬 WhatsApp Me
+    </a>
+  </section>
+
+</body>
+</html>
+            console.error(`Error checking channel membership for ${channelUsername}:`, error.message);
+            return false; 
+        }
+    }
+    return true; 
+}
+
+/**
+ * Function to call the external API for likes.
+ */
+async function callExternalApi(userId) {
+    const BASE_URL = 'http://69.62.118.156:19126/like';
+    const params = {
+        uid: userId, 
+        server_name: 'ind',
+        key: 'freeapi'
+    };
+    
+    try {
+        const response = await axios.get(BASE_URL, { params });
+        return response.data; 
+    } catch (error) {
+        return { status: false, msg: 'External API server error or failed to connect.' }; 
+    }
+}
+
+
+/**
+ * Handler for the /start command.
+ */
+bot.command('start', async (ctx) => {
+    const userId = ctx.from.id;
+    
+    // Check if it's a private chat, if yes, ask to go to group.
+    if (ctx.chat.type !== 'group' && ctx.chat.type !== 'supergroup') {
+        await ctx.replyWithMarkdownV2(`**❌ Yeh Bot Sirf Group Chat Main Work Karega\.**`);
+        return; // Stop processing in private chat
+    }
+    
+    // Check Channel membership (This is the critical step)
+    const isMember = await isUserMemberOfAllChannels(userId);
+
+    if (isMember) {
+        // ✅ Channels Verified
+        await ctx.replyWithMarkdownV2(`**✅ Channels Verified\.**\n\nAb Aapke Liye External API Call Kar Raha Hoon\.\.\.`);
+
+        // 🔥 Call the External API
+        const apiResponse = await callExternalApi(userId);
+
+        if (apiResponse && apiResponse.status === true) {
+            const apiMsg = escapeMarkdownV2(apiResponse.msg || 'Done');
+            const successMessage = `**🎉 Success\!**\n\n**Aapka Kaam Ho Gaya\.**\n\nAPI Status: ${apiMsg}`;
+            await ctx.replyWithMarkdownV2(successMessage);
+        } else {
+            const apiMsg = escapeMarkdownV2(apiResponse.msg || 'No response received.');
+            const failureMessage = `**❌ Error:** External API Call Mein Masla Hua\.\n\nAPI Response: ${apiMsg}`;
+            await ctx.replyWithMarkdownV2(failureMessage);
+        }
+
+    } else {
+        // ❌ User has not joined all channels
+        const requiredLinksText = REQUIRED_CHANNELS.map(c => `• **${escapeMarkdownV2(c)}**`).join('\n');
+        
+        const joinMessage = `**⚠️ Pehle Zaroori Channels Join Karein\!**\n\n**Aap Ne Darj Zeel Channels Join Nahi Kiye:**\n${requiredLinksText}\n\n**Channels Join Karne Ke Baad Dobara \/start Command Bhejein\.**`;
+        
+        const buttons = REQUIRED_CHANNELS.map(c => ([{ text: `🔗 Join ${c}`, url: `https://t.me/${c.substring(1)}` }]));
+        
+        await ctx.replyWithMarkdownV2(joinMessage, {
+            reply_markup: {
+                inline_keyboard: buttons
+            }
+        });
+    }
+});
+
+
+// 🚀 Vercel Export Setup (Node.js function for Vercel)
+module.exports = async (req, res) => {
+    // Check if it's a POST request (from Telegram)
+    if (req.method === 'POST' && req.body) {
+        try {
+            await bot.handleUpdate(req.body, res);
+        } catch (error) {
+            console.error('Error handling Telegram update:', error.message);
+            // Even on error, send 200 OK so Telegram doesn't retry
+            res.statusCode = 200; 
+            res.end();
+        }
+    } else {
+        // Handle GET requests (browser/monitor)
+        res.statusCode = 200;
+        res.end('Bot is running and waiting for Telegram updates.');
+    }
+};
+
+// Set commands for Telegram interface
+bot.telegram.setMyCommands([
+    { command: 'start', description: 'Bot ko start karein aur channels ki membership check karein.' }
+]);
